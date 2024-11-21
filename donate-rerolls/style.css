@@ -1,0 +1,9 @@
+.donate-icon {
+    background: url(assets/donate.svg) no-repeat 50%;
+    background-size: contain;
+    height: 24px;
+    left: -4px;
+    position: absolute;
+    top: -4px;
+    width: 24px
+}
