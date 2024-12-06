@@ -6,6 +6,14 @@
  * @link https://github.com/kem0x/donate-rerolls
  */
 
+/*
+Auto pick fav champions on available list
+^ if possible, set weight for champions or order
+
+Auto Accept Swap
+^ option to only accept if option is fav champion
+*/
+
 import "./style.css";
 
 const delay = (t) => new Promise((r) => setTimeout(r, t));
@@ -55,11 +63,18 @@ async function mount() {
         await delay(100);
     }
 
-    const session = await fetch(
-        "/lol-champ-select/v1/session",
-    ).then((r) => r.json());
+    let session = await getCurrentSession();
 
     if (!session.allowRerolling) {
+        return;
+    }
+
+    if (_donateButton) {
+        if (session.rerollsRemaining == 0) {
+            _donateButton.setAttribute("disabled", "");
+        } else if (_donateButton.hasAttribute("disabled")) {
+            _donateButton.removeAttribute("disabled");
+        }
         return;
     }
 
@@ -112,6 +127,13 @@ async function load() {
         if (endpoint === EP_GAMEFLOW) {
             if (data === "ChampSelect") {
                 mount();
+            } else if (data === "None") {
+                if (_donateButton) {
+                    if (_donateButton.hasAttribute("disabled")) {
+                        _donateButton.removeAttribute("disabled");
+                    }
+                    _donateButton.remove();
+                }
             }
         }
     };

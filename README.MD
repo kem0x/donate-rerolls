@@ -13,8 +13,7 @@ donate reroll button to any mode that supports rerolls.
 
 ## Usage
 
-- Download the latest zip from
-  [here](https://github.com/kem0x/donate-reroll/releases)
+- Download the latest zip of the repo
 
 - Extract it to your pengu loader plugins folder (so you end-up with something
   that looks like this `C:\Program Files\Pengu Loader\plugins\donate-rerolls`)
